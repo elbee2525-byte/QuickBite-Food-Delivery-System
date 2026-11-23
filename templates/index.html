@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickBite - Online Food Delivery</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8f8f8;
+            color: #222;
+        }
+
+        header {
+            background: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 28px;
+            color: #ff5a1f;
+            font-weight: bold;
+        }
+
+        nav a {
+            margin: 8px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .cart {
+            font-weight: bold;
+        }
+
+        .hero {
+            background: #fff0e8;
+            padding: 70px 8%;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+        }
+
+        button {
+            background: #ff5a1f;
+            color: white;
+            border: none;
+            padding: 13px 22px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #e74710;
+        }
+
+        .menu {
+            padding: 40px 8%;
+        }
+
+        .menu h2,
+        .checkout h2 {
+            text-align: center;
+        }
+
+        .food-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .food-card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px #ddd;
+        }
+
+        .food-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .price {
+            color: #ff5a1f;
+            font-weight: bold;
+        }
+
+        .checkout {
+            background: white;
+            padding: 40px 8%;
+            margin: 30px 8%;
+            border-radius: 12px;
+        }
+
+        .checkout form {
+            max-width: 500px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .checkout input,
+        .checkout textarea {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .checkout textarea {
+            min-height: 100px;
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🍔 QuickBite</div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#checkout">Checkout</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="cart">
+        🛒 Cart: <span id="cart-count">0</span>
+        <p>Total: <span id="cart-total">₦0</span></p>
+    </div>
+</header>
+
+<section class="hero">
+    <h1>Delicious Food Delivered To Your Door!</h1>
+    <p>Order your favourite meals from the comfort of your home.</p>
+
+    <button onclick="document.getElementById('menu').scrollIntoView()">
+        Order Now
+    </button>
+</section>
+
+<section class="menu" id="menu">
+
+    <h2>Our Popular Meals</h2>
+
+    <div class="food-container">
+
+        <div class="food-card">
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500"
+                 alt="Classic Burger">
+
+            <h3>Classic Burger</h3>
+            <p>Fresh and delicious burger.</p>
+            <p class="price">₦5,000</p>
+
+            <button onclick="addToCart('Classic Burger', 5000)">
+                Add to Cart
+            </button>
+        </div>
+
+        <div class="food-card">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500"
+                 alt="Special Pizza">
+
+            <h3>Special Pizza</h3>
+            <p>Hot pizza with delicious toppings.</p>
+            <p class="price">₦8,500</p>
+
+            <button onclick="addToCart('Special Pizza', 8500)">
+                Add to Cart
+            </button>
+        </div>
+
+        <div class="food-card">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500"
+                 alt="Chicken Rice">
+
+            <h3>Chicken Rice</h3>
+            <p>Rice served with grilled chicken.</p>
+            <p class="price">₦6,500</p>
+
+            <button onclick="addToCart('Chicken Rice', 6500)">
+                Add to Cart
+            </button>
+        </div>
+
+    </div>
+</section>
+
+<section class="checkout" id="checkout">
+
+    <h2>Customer Checkout</h2>
+
+    <form action="/place_order" method="POST">
+
+        <label>Full Name</label>
+        <input type="text" name="name"
+               placeholder="Enter your full name" required>
+
+        <label>Phone Number</label>
+        <input type="tel" name="phone"
+               placeholder="Enter your phone number" required>
+
+        <label>Delivery Address</label>
+        <textarea name="address"
+                  placeholder="Enter your delivery address"
+                  required></textarea>
+
+        <input type="hidden" name="total" id="order-total" value="0">
+
+        <button type="submit">Place Order</button>
+
+    </form>
+
+</section>
+
+<footer id="contact">
+    <p>© 2026 QuickBite Online Food Delivery System</p>
+    <p>Fresh Food. Fast Delivery.</p>
+</footer>
+
+<script>
+    let cart = [];
+
+    function addToCart(name, price) {
+
+        cart.push({
+            name: name,
+            price: price
+        });
+
+        updateCart();
+
+        alert(name + " added to your cart!");
+    }
+
+    function updateCart() {
+
+        let total = 0;
+
+        cart.forEach(item => {
+            total += item.price;
+        });
+
+        document.getElementById("cart-count").innerText = cart.length;
+
+        document.getElementById("cart-total").innerText =
+            "₦" + total.toLocaleString();
+
+        document.getElementById("order-total").value = total;
+    }
+</script>
+
+</body>
+</html>
