@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request
+import os
 import sqlite3
+from flask import Flask, render_template, request, session, redirect, url_for
 
 app = Flask(__name__)
-
+app.secret_key = os.environ.get("SECRET_KEY", "temporary-development-key")
 # Create database
 def create_database():
     conn = sqlite3.connect("foodie.db")
@@ -28,8 +29,42 @@ def home():
 @app.route("/portfolio")
 def portfolio():
     return render_template("portfolio.html")
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    error = None
+
+    if request.method == "POST":
+        admin_password = os.environ.get("ADMIN_PASSWORD")
+
+        if not admin_password:
+            error = "Admin password is not configured."
+        elif request.form.get("password") == admin_password:
+            session["admin_logged_in"] = True
+            return redirect(url_for("admin"))
+        else:
+            error = "Incorrect password!"
+
+    return render_template("login.html", error=error)
+
+
 @app.route("/admin")
 def admin():
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    conn = sqlite3.connect("foodie.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM orders")
+    orders = cursor.fetchall()
+
+    conn.close()
+
+    return render_template("admin.html", orders=orders)
+def admin():
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
     conn = sqlite3.connect("foodie.db")
     cursor = conn.cursor()
 
@@ -40,6 +75,10 @@ def admin():
 
     return render_template("admin.html", orders=orders)
 
+@app.route("/logout")
+def logout():
+    session.pop("admin_logged_in", None)
+    return redirect(url_for("login"))
 @app.route("/place_order", methods=["POST"])
 def place_order():
     name = request.form.get("name")
