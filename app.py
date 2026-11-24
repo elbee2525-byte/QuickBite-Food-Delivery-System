@@ -18,7 +18,13 @@ def create_database():
             total REAL
         )
     """)
+    columns = [row[1] for row in conn.execute("PRAGMA table_info(orders)")]
 
+    if "status" not in columns:
+        conn.execute("""
+            ALTER TABLE orders
+            ADD COLUMN status TEXT DEFAULT 'Pending'
+        """)
     conn.commit()
     conn.close()
 
@@ -45,8 +51,6 @@ def login():
             error = "Incorrect password!"
 
     return render_template("login.html", error=error)
-
-
 @app.route("/admin")
 def admin():
     if not session.get("admin_logged_in"):
@@ -58,23 +62,34 @@ def admin():
     cursor.execute("SELECT * FROM orders")
     orders = cursor.fetchall()
 
+    print("ORDERS FOUND:", orders)
+
     conn.close()
 
     return render_template("admin.html", orders=orders)
-def admin():
+
+@app.route("/update_status/<int:order_id>", methods=["POST"])
+def update_status(order_id):
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
+
+    status = request.form.get("status")
+
+    if status not in ["Pending", "Preparing", "Delivered"]:
+        return "Invalid order status", 400
 
     conn = sqlite3.connect("foodie.db")
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM orders")
-    orders = cursor.fetchall()
+    cursor.execute(
+        "UPDATE orders SET status = ? WHERE id = ?",
+        (status, order_id)
+    )
 
+    conn.commit()
     conn.close()
 
-    return render_template("admin.html", orders=orders)
-
+    return redirect(url_for("admin"))
 @app.route("/logout")
 def logout():
     session.pop("admin_logged_in", None)

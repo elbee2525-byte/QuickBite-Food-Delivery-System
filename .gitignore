@@ -1,7 +1,10 @@
 venv/
+.venv/
 __pycache__/
-*.pyc
+*.py[cod]
 .env
+.env.*
 instance/
-foodie.db
+*.db
+templates/index_backup.html
 /index.html

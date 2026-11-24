@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -149,142 +150,340 @@
 
 <body>
 
-<header>
-    <div class="logo">🍔 QuickBite</div>
+    <header>
+        <div class="logo">🍔 QuickBite</div>
 
-    <nav>
-        <a href="/">Home</a>
-        <a href="#menu">Menu</a>
-        <a href="#checkout">Checkout</a>
-        <a href="#contact">Contact</a>
-    </nav>
+        <nav>
+            <a href="/">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#checkout">Checkout</a>
+            <a href="#contact">Contact</a>
+        </nav>
 
-    <div class="cart">
-        🛒 Cart: <span id="cart-count">0</span>
-        <p>Total: <span id="cart-total">₦0</span></p>
-    </div>
-</header>
+        <div class="cart">
+            🛒 Cart: <span id="cart-count">0</span>
+            <p>Total: <span id="cart-total">₦0</span></p>
+        </div>
+    </header>
 
-<section class="hero">
-    <h1>Delicious Food Delivered To Your Door!</h1>
-    <p>Order your favourite meals from the comfort of your home.</p>
+    <section class="hero">
+        <h1>Delicious Food Delivered To Your Door!</h1>
+        <p>Order your favourite meals from the comfort of your home.</p>
 
-    <button onclick="document.getElementById('menu').scrollIntoView()">
-        Order Now
-    </button>
-</section>
+        <button onclick="document.getElementById('menu').scrollIntoView()">
+            Order Now
+        </button>
+    </section>
 
-<section class="menu" id="menu">
+    <section class="menu" id="menu">
+        <h2>Our Popular Meals</h2>
 
-    <h2>Our Popular Meals</h2>
+        <h3>🍚 Rice Meals</h3>
+        <div class="food-container">
 
-    <div class="food-container">
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500" alt="Jollof Rice">
+                <h3>Jollof Rice</h3>
+                <p class="price">₦2,500</p>
+                <button onclick="addToCart('Jollof Rice',2500)">Add to Cart</button>
+            </div>
 
-        <div class="food-card">
-            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500"
-                 alt="Classic Burger">
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=500" alt="Fried Rice">
+                <h3>Fried Rice</h3>
+                <p class="price">₦3,000</p>
+                <button onclick="addToCart('Fried Rice',3000)">Add to Cart</button>
+            </div>
 
-            <h3>Classic Burger</h3>
-            <p>Fresh and delicious burger.</p>
-            <p class="price">₦5,000</p>
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1516684732162-798a0062be99?w=500" alt="White Rice">
+                <h3>White Rice & Stew</h3>
+                <p class="price">₦2,500</p>
+                <button onclick="addToCart('White Rice & Stew',2500)">Add to Cart</button>
+            </div>
 
-            <button onclick="addToCart('Classic Burger', 5000)">
-                Add to Cart
-            </button>
+            <div class="food-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFS0bcqTtT6kRUuCWccUf7FRRc-Xsf3jSnkY-QMHkP7w&s=10"
+                    alt="Rice and Beans">
+                <h3>Rice & Beans</h3>
+                <p class="price">₦2,500</p>
+                <button onclick="addToCart('Rice & Beans',2500)">Add to Cart</button>
+            </div>
+
+            <div class="food-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRJ28KUQeZGrKi9gYJe3C5M1d_npdrVWHy5q5iFOrjCg&s=10"
+                    alt="Rice and Chicken">
+                <h3>Rice & Chicken</h3>
+                <p class="price">₦4,500</p>
+                <button onclick="addToCart('Rice & Chicken',4500)">Add to Cart</button>
+            </div>
+
         </div>
 
-        <div class="food-card">
-            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500"
-                 alt="Special Pizza">
+        <h3>🫘 Beans Meals</h3>
+        <div class="food-container">
+            <div class="food-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM3xg5sOEdzbsp0cC8Er3bhXSuZcxaA2JE8-M-nYNYtg&s=10"
+                    alt="Beans">
+                <h3>Beans & Stew</h3>
+                <p class="price">₦2,000</p>
+                <button onclick="addToCart('Beans & Stew',2000)">Add to Cart</button>
+            </div>
 
-            <h3>Special Pizza</h3>
-            <p>Hot pizza with delicious toppings.</p>
-            <p class="price">₦8,500</p>
+            <div class="food-card">
+                <img src="data:image/jpeg;base64,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"
+                    alt="Bread and Beans">
+                <h3>Beans & Bread</h3>
+                <p class="price">₦2,000</p>
+                <button onclick="addToCart('Beans & Bread',2000)">Add to Cart</button>
+            </div>
 
-            <button onclick="addToCart('Special Pizza', 8500)">
-                Add to Cart
-            </button>
+            <div class="food-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsRTC6JUUVWIdfHVC2Q1kXlMn9laTTpyQWzzCaxvFMBw&s=10"
+                    alt="Beans and Garri">
+                <h3>Beans & Garri</h3>
+                <p class="price">₦2,000</p>
+                <button onclick="addToCart('Beans & Garri',2000)">Add to Cart</button>
+            </div>
+
+            <div class="food-card">
+                <img src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzDZT4Ue3s5RoyXwkIt6Ob8McQzcz-xcjtfV6VqmwNqQ&s=10"
+                    alt="Beans and Plantain">
+                <h3>Beans & Plantain</h3>
+                <p class="price">₦2,500</p>
+                <button onclick="addToCart('Beans & Plantain',2500)">Add to Cart</button>
+            </div>
         </div>
 
-        <div class="food-card">
-            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500"
-                 alt="Chicken Rice">
+        <h3>🥔 Potato Meals</h3>
+        <div class="food-container">
+            <div class="food-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdN94XsRcl4unBIAH52vUkSGlyrhxM6Fs7EJ9wVueCDQ&s=10"
+                    alt="Fried Potatoes">
+                <h3>Fried Potatoes</h3>
+                <p class="price">₦2,000</p>
+                <button onclick="addToCart('Fried Potatoes',2000)">Add to Cart</button>
+            </div>
 
-            <h3>Chicken Rice</h3>
-            <p>Rice served with grilled chicken.</p>
-            <p class="price">₦6,500</p>
+            <div class="food-card">
+                <img src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA3ybswGvAIc2Ymr2g_NiRyKVlL90Jj3nQAEIZzFYaAg&s=10"
+                    alt="Boiled Potatoes">
+                <h3>Boiled Potatoes</h3>
+                <p class="price">₦1,800</p>
+                <button onclick="addToCart('Boiled Potatoes',1800)">Add to Cart</button>
+            </div>
 
-            <button onclick="addToCart('Chicken Rice', 6500)">
-                Add to Cart
-            </button>
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=500" alt="Potato Chips">
+                <h3>Potato Chips</h3>
+                <p class="price">₦1,500</p>
+                <button onclick="addToCart('Potato Chips',1500)">Add to Cart</button>
+            </div>
         </div>
 
-    </div>
-</section>
+        <h3>🥟 Snacks</h3>
+        <div class="food-container">
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500" alt="Samosa">
+                <h3>Samosa</h3>
+                <p class="price">₦700</p>
+                <button onclick="addToCart('Samosa',700)">Add to Cart</button>
+            </div>
 
-<section class="checkout" id="checkout">
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?w=500" alt="Spring Rolls">
+                <h3>Spring Rolls</h3>
+                <p class="price">₦700</p>
+                <button onclick="addToCart('Spring Rolls',700)">Add to Cart</button>
+            </div>
 
-    <h2>Customer Checkout</h2>
+            <div class="food-card">
+                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Fydzhin_cross-section.jpg/500px-Fydzhin_cross-section.jpg?utm_source=commons.wikimedia.org&utm_campaign=parser&utm_content=thumbnail"
+                    alt="Meat Pie">
+                <h3>Meat Pie</h3>
+                <p class="price">₦1,000</p>
+                <button onclick="addToCart('Meat Pie',1000)">Add to Cart</button>
+            </div>
 
-    <form action="/place_order" method="POST">
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500" alt="Sausage Roll">
+                <h3>Sausage Roll</h3>
+                <p class="price">₦800</p>
+                <button onclick="addToCart('Sausage Roll',800)">Add to Cart</button>
+            </div>
 
-        <label>Full Name</label>
-        <input type="text" name="name"
-               placeholder="Enter your full name" required>
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1603532648955-039310d9ed75?w=500" alt="Puff Puff">
+                <h3>Puff-Puff</h3>
+                <p class="price">₦500</p>
+                <button onclick="addToCart('Puff-Puff',500)">Add to Cart</button>
+            </div>
 
-        <label>Phone Number</label>
-        <input type="tel" name="phone"
-               placeholder="Enter your phone number" required>
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=500" alt="Doughnut">
+                <h3>Doughnut</h3>
+                <p class="price">₦800</p>
+                <button onclick="addToCart('Doughnut',800)">Add to Cart</button>
+            </div>
 
-        <label>Delivery Address</label>
-        <textarea name="address"
-                  placeholder="Enter your delivery address"
-                  required></textarea>
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=500" alt="Chin Chin">
+                <h3>Chin-Chin</h3>
+                <p class="price">₦500</p>
+                <button onclick="addToCart('Chin-Chin',500)">Add to Cart</button>
+            </div>
 
-        <input type="hidden" name="total" id="order-total" value="0">
+            <div class="food-card">
+                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/CrunchyBuns.JPG/500px-CrunchyBuns.JPG?utm_source=commons.wikimedia.org&utm_campaign=parser&utm_content=thumbnail"
+                    alt="Buns">
+                <h3>Buns</h3>
+                <p class="price">₦500</p>
+                <button onclick="addToCart('Buns',500)">Add to Cart</button>
+            </div>
 
-        <button type="submit">Place Order</button>
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500" alt="Shawarma">
+                <h3>Shawarma</h3>
+                <p class="price">₦3,500</p>
+                <button onclick="addToCart('Shawarma',3500)">Add to Cart</button>
+            </div>
+        </div>
 
-    </form>
+        <h3>🍗 Extras</h3>
+        <div class="food-container">
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500" alt="Fried Egg">
+                <h3>Fried Egg</h3>
+                <p class="price">₦700</p>
+                <button onclick="addToCart('Fried Egg',700)">Add to Cart</button>
+            </div>
 
-</section>
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=500" alt="Chicken">
+                <h3>Chicken</h3>
+                <p class="price">₦2,000</p>
+                <button onclick="addToCart('Chicken',2000)">Add to Cart</button>
+            </div>
 
-<footer id="contact">
-    <p>© 2026 QuickBite Online Food Delivery System</p>
-    <p>Fresh Food. Fast Delivery.</p>
-</footer>
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=500" alt="Beef">
+                <h3>Beef</h3>
+                <p class="price">₦1,000</p>
+                <button onclick="addToCart('Beef',1000)">Add to Cart</button>
+            </div>
 
-<script>
-    let cart = [];
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500" alt="Plantain">
+                <h3>Plantain</h3>
+                <p class="price">₦1,000</p>
+                <button onclick="addToCart('Plantain',1000)">Add to Cart</button>
+            </div>
 
-    function addToCart(name, price) {
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=500" alt="Extra Stew">
+                <h3>Extra Stew</h3>
+                <p class="price">₦500</p>
+                <button onclick="addToCart('Extra Stew',500)">Add to Cart</button>
+            </div>
+        </div>
 
-        cart.push({
-            name: name,
-            price: price
-        });
+        <h3>🥤 Drinks</h3>
+        <div class="food-container">
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1523362628745-0c100150b504?w=500" alt="Bottled Water">
+                <h3>Bottled Water</h3>
+                <p class="price">₦300</p>
+                <button onclick="addToCart('Bottled Water',300)">Add to Cart</button>
+            </div>
 
-        updateCart();
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1554866585-cd94860890b7?w=500" alt="Coca Cola">
+                <h3>Coca-Cola</h3>
+                <p class="price">₦500</p>
+                <button onclick="addToCart('Coca-Cola',500)">Add to Cart</button>
+            </div>
 
-        alert(name + " added to your cart!");
-    }
+            <div class="food-card">
+                <img
+                    src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9p3r5vjnZhHdDjnPjbZ4oYAv3HWI4DLNh3QSPp3WuBg&s=10>
+                <h3>Fanta</h3>
+                <p class="price">₦500</p>
+                <button onclick="addToCart('Fanta',500)">Add to Cart</button>
+            </div>
 
-    function updateCart() {
+            <div class="food-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj_d3fPGnybsFU4NoxZHpF61RXdIQj3gRHy7GqZI7cow&s=10"
+                    alt="Sprite">
+                <h3>Sprite</h3>
+                <p class="price">₦500</p>
+                <button onclick="addToCart('Sprite',500)">Add to Cart</button>
+            </div>
 
-        let total = 0;
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=500" alt="Malt">
+                <h3>Malt</h3>
+                <p class="price">₦800</p>
+                <button onclick="addToCart('Malt',800)">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+    <section class="checkout" id="checkout">
+        <h2>Checkout</h2>
 
-        cart.forEach(item => {
-            total += item.price;
-        });
+        <form action="/place_order" method="POST">
 
-        document.getElementById("cart-count").innerText = cart.length;
+            <label>Full Name</label>
+            <input type="text" name="name" placeholder="Enter your full name" required>
 
-        document.getElementById("cart-total").innerText =
-            "₦" + total.toLocaleString();
+            <label>Phone Number</label>
+            <input type="tel" name="phone" placeholder="Enter your phone number" required>
 
-        document.getElementById("order-total").value = total;
-    }
-</script>
+            <label>Delivery Address</label>
+            <textarea name="address" placeholder="Enter your delivery address" required></textarea>
+
+            <input type="hidden" name="total" id="order-total" value="0">
+
+            <button type="submit">Place Order</button>
+
+        </form>
+    </section>
+    <footer id="contact">
+        <p>© 2026 QuickBite Online Food Delivery System</p>
+        <p>Fresh Food. Fast Delivery.</p>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        function addToCart(name, price) {
+
+            cart.push({
+                name: name,
+                price: price
+            });
+
+            updateCart();
+
+            alert(name + " added to your cart!");
+        }
+
+        function updateCart() {
+
+            let total = 0;
+
+            cart.forEach(item => {
+                total += item.price;
+            });
+
+            document.getElementById("cart-count").innerText = cart.length;
+
+            document.getElementById("cart-total").innerText =
+                "₦" + total.toLocaleString();
+
+            document.getElementById("order-total").value = total;
+        }
+    </script>
 
 </body>
+
 </html>
