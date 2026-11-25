@@ -117,8 +117,10 @@ def place_order():
 
 create_database()
 
-if __name__ == "__main__":
-    app.run(debug=True)
-    @app.route("/portfolio")
+@app.route("/portfolio")
 def portfolio():
     return render_template("portfolio.html")
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
