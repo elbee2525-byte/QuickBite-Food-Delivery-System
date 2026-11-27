@@ -442,7 +442,7 @@
             <textarea name="address" placeholder="Enter your delivery address" required></textarea>
 
             <input type="hidden" name="total" id="order-total" value="0">
-
+            <input type="hidden" name="items" id="cart-items">
             <button type="submit">Place Order</button>
 
         </form>
@@ -451,36 +451,44 @@
         <p>© 2026 QuickBite Online Food Delivery System</p>
         <p>Fresh Food. Fast Delivery.</p>
     </footer>
-
     <script>
         let cart = [];
 
         function addToCart(name, price) {
+            let existingItem = cart.find(item => item.name === name);
 
-            cart.push({
-                name: name,
-                price: price
-            });
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    name: name,
+                    price: Number(price),
+                    quantity: 1
+                });
+            }
 
             updateCart();
-
             alert(name + " added to your cart!");
         }
 
         function updateCart() {
-
             let total = 0;
+            let count = 0;
 
             cart.forEach(item => {
-                total += item.price;
+                total += item.price * item.quantity;
+                count += item.quantity;
             });
 
-            document.getElementById("cart-count").innerText = cart.length;
+            document.getElementById("cart-count").innerText = count;
 
             document.getElementById("cart-total").innerText =
                 "₦" + total.toLocaleString();
 
             document.getElementById("order-total").value = total;
+
+            document.getElementById("cart-items").value =
+                JSON.stringify(cart);
         }
     </script>
 

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickBite - Order Receipt</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 30px;
+        }
+
+        .receipt {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6600;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+        }
+
+        .details {
+            border-top: 1px dashed #999;
+            border-bottom: 1px dashed #999;
+            padding: 15px 0;
+            margin: 20px 0;
+        }
+
+        .details p {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px 5px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff6600;
+            margin-top: 20px;
+        }
+
+        .thank-you {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 12px 25px;
+            background: #ff6600;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .receipt {
+                box-shadow: none;
+            }
+
+            button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="receipt">
+
+        <h1>🍔 QuickBite</h1>
+        <p class="subtitle">Online Food Delivery</p>
+
+        <h2 style="text-align:center;">ORDER RECEIPT</h2>
+
+        <div class="details">
+            <p><strong>Order ID:</strong> QB-{{ "%04d"|format(order[0]) }}</p>
+            <p><strong>Customer:</strong> {{ order[1] }}</p>
+            <p><strong>Phone:</strong> {{ order[2] }}</p>
+            <p><strong>Address:</strong> {{ order[3] }}</p>
+            <p><strong>Status:</strong> {{ order[5] }}</p>
+        </div>
+
+        <h3>Ordered Items</h3>
+
+        <table>
+            <tr>
+                <th>Food</th>
+                <th>Qty</th>
+                <th>Price</th>
+            </tr>
+
+            {% for item in items %}
+            <tr>
+                <td>{{ item[0] }}</td>
+                <td>{{ item[1] }}</td>
+                <td>₦{{ "{:,.2f}".format(item[3]) }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div class="total">
+            Total: ₦{{ "{:,.2f}".format(order[4]) }}
+        </div>
+
+        <div class="thank-you">
+            <p>Thank you for ordering with QuickBite!</p>
+            <p>Enjoy your meal ❤️</p>
+        </div>
+
+        <button onclick="window.print()">Print Receipt</button>
+
+    </div>
+
+</body>
+
+</html>
